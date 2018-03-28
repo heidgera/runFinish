@@ -1,7 +1,7 @@
 'use strict';
 const electron = require('electron');
 
-const config = require('./ForBoot/appData/config.js');
+const config = require('/boot/appData/config.js');
 
 // Module to control application life.
 const app = electron.app;
