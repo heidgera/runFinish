@@ -29,7 +29,7 @@ function createWindow() {
 
     //kiosk: true,
     scrollBounce: false,
-    title: 'TemplateProject',
+    title: 'Finish!',
   });
 
   mainWindow.maximize();
@@ -38,13 +38,13 @@ function createWindow() {
 
   // and load the index.html of the app.
   mainWindow.loadURL(url.format({
-    pathname: path.join(__dirname, 'local/index.html'),
-    protocol: 'file:',
-    slashes: true,
+    pathname: 'http://192.168.1.8:3000/finish',//path.join(__dirname, 'local/index.html'),
+    //protocol: 'http:',
+    // slashes: true,
   }));
 
   // Open the DevTools.
-  //mainWindow.webContents.openDevTools();
+  mainWindow.webContents.openDevTools();
 
   mainWindow.webContents.session.clearCache(function () {
     //some callback.

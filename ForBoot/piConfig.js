@@ -6,7 +6,7 @@ exports.config = {
       domainName: 'template.net',
     },*/
     autostart: true,
-    gitWatch: true,
+    //gitWatch: true,
     /*softShutdown: {
       monitorPin: 24,
       controlPin: 25,
