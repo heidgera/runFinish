@@ -6,6 +6,7 @@ exports.config = {
       domainName: 'template.net',
     },*/
     autostart: true,
+    staticIP: '192.168.1.24',
     //gitWatch: true,
     /*softShutdown: {
       monitorPin: 24,

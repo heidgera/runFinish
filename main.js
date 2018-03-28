@@ -1,6 +1,8 @@
 'use strict';
 const electron = require('electron');
 
+const config = require('./ForBoot/appData/config.js');
+
 // Module to control application life.
 const app = electron.app;
 app.commandLine.appendSwitch('--enable-viewport-meta', 'true');
@@ -27,24 +29,38 @@ function createWindow() {
     height: size.height,
     frame: false,
 
-    //kiosk: true,
+    kiosk: true,
     scrollBounce: false,
     title: 'Finish!',
+    backgroundColor: '#000',
   });
 
   mainWindow.maximize();
 
   mainWindow.setMenu(null);
 
+  var mainAddress = config.address;
+
   // and load the index.html of the app.
-  mainWindow.loadURL(url.format({
-    pathname: 'http://192.168.1.8:3000/finish',//path.join(__dirname, 'local/index.html'),
-    //protocol: 'http:',
-    // slashes: true,
-  }));
+  mainWindow.loadURL(mainAddress);
 
   // Open the DevTools.
-  //mainWindow.webContents.openDevTools();
+  if (config.showDevTools) mainWindow.webContents.openDevTools();
+
+  mainWindow.webContents.on('did-fail-load', function () {
+    mainWindow.loadUrl(mainAddress);
+  });
+
+  function baseLog(x, y) {
+    return Math.log(y) / Math.log(x);
+  }
+
+  mainWindow.webContents.on('did-finish-load', function () {
+   	mainWindow.webContents.insertCSS('html,body{ cursor: none; !important;}');
+    //mainWindow.webContents.executeJavaScript(`document.querySelector("#outer").textContent = ${size.width}`);
+
+    mainWindow.webContents.setZoomLevel(baseLog(1.2, size.width / 1920));
+  });
 
   mainWindow.webContents.session.clearCache(function () {
     //some callback.
