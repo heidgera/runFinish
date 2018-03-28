@@ -47,8 +47,16 @@ function createWindow() {
   // Open the DevTools.
   if (config.showDevTools) mainWindow.webContents.openDevTools();
 
+  var reloadInt = 0;
+
   mainWindow.webContents.on('did-fail-load', function () {
     if (mainWindow && mainWindow.loadUrl) mainWindow.loadUrl(mainAddress);
+    else {
+      clearInterval(reloadInt);
+      reloadInt = setInterval(()=> {
+        if (mainWindow && mainWindow.loadUrl) mainWindow.loadUrl(mainAddress);
+      }, 1000);
+    }
   });
 
   function baseLog(x, y) {

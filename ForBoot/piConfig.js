@@ -7,6 +7,7 @@ exports.config = {
     },*/
     autostart: true,
     staticIP: '192.168.1.24',
+    preventSleep: true,
     //gitWatch: true,
     /*softShutdown: {
       monitorPin: 24,
