@@ -48,7 +48,7 @@ function createWindow() {
   if (config.showDevTools) mainWindow.webContents.openDevTools();
 
   mainWindow.webContents.on('did-fail-load', function () {
-    mainWindow.loadUrl(mainAddress);
+    if (mainWindow && mainWindow.loadUrl) mainWindow.loadUrl(mainAddress);
   });
 
   function baseLog(x, y) {
