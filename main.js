@@ -55,7 +55,7 @@ function createWindow() {
       clearInterval(reloadInt);
       reloadInt = setInterval(()=> {
         if (mainWindow && mainWindow.loadUrl) mainWindow.loadUrl(mainAddress);
-      }, 1000);
+      }, 5000);
     }
   });
 
@@ -64,6 +64,7 @@ function createWindow() {
   }
 
   mainWindow.webContents.on('did-finish-load', function () {
+    clearInterval(reloadInt);
    	mainWindow.webContents.insertCSS('html,body{ cursor: none; !important;}');
     //mainWindow.webContents.executeJavaScript(`document.querySelector("#outer").textContent = ${size.width}`);
 
