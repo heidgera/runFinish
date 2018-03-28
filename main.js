@@ -47,16 +47,8 @@ function createWindow() {
   // Open the DevTools.
   if (config.showDevTools) mainWindow.webContents.openDevTools();
 
-  var reloadInt = 0;
-
   mainWindow.webContents.on('did-fail-load', function () {
-    if (mainWindow && mainWindow.loadUrl) mainWindow.loadUrl(mainAddress);
-    else {
-      clearInterval(reloadInt);
-      reloadInt = setInterval(()=> {
-        if (mainWindow && mainWindow.loadUrl) mainWindow.loadUrl(mainAddress);
-      }, 5000);
-    }
+    mainWindow.loadURL(mainAddress);
   });
 
   function baseLog(x, y) {
@@ -64,7 +56,6 @@ function createWindow() {
   }
 
   mainWindow.webContents.on('did-finish-load', function () {
-    clearInterval(reloadInt);
    	mainWindow.webContents.insertCSS('html,body{ cursor: none; !important;}');
     //mainWindow.webContents.executeJavaScript(`document.querySelector("#outer").textContent = ${size.width}`);
 
