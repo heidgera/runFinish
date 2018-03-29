@@ -59,7 +59,7 @@ function createWindow() {
    	mainWindow.webContents.insertCSS('html,body{ cursor: none; !important;}');
     //mainWindow.webContents.executeJavaScript(`document.querySelector("#outer").textContent = ${size.width}`);
 
-    mainWindow.webContents.setZoomLevel(baseLog(1.2, size.width / 1920));
+    mainWindow.webContents.setZoomLevel(baseLog(1.2, size.height / 1080));
   });
 
   mainWindow.webContents.session.clearCache(function () {
