@@ -3,6 +3,8 @@ const electron = require('electron');
 
 const config = require('/boot/appData/config.js');
 
+if (config.preventStartup) process.exit(0);
+
 // Module to control application life.
 const app = electron.app;
 app.commandLine.appendSwitch('--enable-viewport-meta', 'true');
@@ -96,8 +98,6 @@ app.on('activate', function () {
     createWindow();
   }
 });
-
-if (config.preventStartup) app.quit();
 
 // In this file you can include the rest of your app's specific main process
 // code. You can also put them in separate files and require them here.
